@@ -1,21 +1,21 @@
 import { ILogin } from '../interfaces/login';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
 import accessLogin from '../models/login';
-import { createToken } from '../helpers/tokens';
+import { createToken } from '../authorization/tokens';
 
 const usernameValidation = (username: string, password: string) => {
   if (username === undefined) {
     return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.USERNAME_INVALID };
   }
-  if (!username && password) {
+  if (username === undefined && password) {
     return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED };
   }
 };
 const passwordValidation = (username: string, password: string) => {
   if (password === undefined) {
-    return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.USERNAME_INVALID };
+    return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.PASSWORD_INVALID };
   }
-  if (username && !password) {
+  if (username && password === undefined) {
     return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED }; 
   }
 };
@@ -29,8 +29,8 @@ const loginValidated = async (login: ILogin) => {
   if (invokeUsername) return invokeUsername;
   if (invokePassword) return invokePassword;
 
-  const responseDB = await accessLogin(login);
-  console.log({ responseDB });
+  const [responseDB] = await accessLogin(login);
+  console.log('res', responseDB);
   
   const token = createToken(responseDB);
   console.log(token);
