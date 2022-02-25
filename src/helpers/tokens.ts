@@ -1,12 +1,11 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { IDuser } from '../interfaces/user';
 // import { ILogin } from '../interfaces/login';
 
 const SECRET = 'SECRET';
 
 // **cria um token:
-export const createToken = (user: IDuser): string => {
+export const createToken = (user: object): string => {
   const token = jwt.sign(user, SECRET, {
     algorithm: 'HS256',
     expiresIn: '10d',

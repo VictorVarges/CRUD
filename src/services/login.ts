@@ -1,8 +1,7 @@
-import { IDLogin, ILogin } from '../interfaces/login';
-import { createToken } from '../helpers/tokens';
+import { ILogin } from '../interfaces/login';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
 import accessLogin from '../models/login';
-import { IDuser } from '../interfaces/user';
+import { createToken } from '../helpers/tokens';
 
 const usernameValidation = (username: string, password: string) => {
   if (username === undefined) {
@@ -21,7 +20,7 @@ const passwordValidation = (username: string, password: string) => {
   }
 };
 
-const loginValidated = async (login: IDuser) => {
+const loginValidated = async (login: ILogin) => {
   const { username, password } = login;
 
   const invokeUsername = usernameValidation(username, password);
@@ -30,10 +29,11 @@ const loginValidated = async (login: IDuser) => {
   if (invokeUsername) return invokeUsername;
   if (invokePassword) return invokePassword;
 
-  const responseDB: Promise<ILogin> = await accessLogin(login);
+  const responseDB = await accessLogin(login);
   console.log({ responseDB });
   
   const token = createToken(responseDB);
+  console.log(token);
 
   return { code: 200, message: token };
 };
