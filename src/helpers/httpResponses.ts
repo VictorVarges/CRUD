@@ -1,7 +1,8 @@
 export enum HTTPSTATUS {
-  BAD_REQUEST = 400,
-  UNPROCESSABLE_ENTITY = 422,
   CREATED = 201,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  UNPROCESSABLE_ENTITY = 422,
 }
 
 export enum MESSAGE {
@@ -17,4 +18,5 @@ export enum MESSAGE {
   PASSWORD_INVALID = 'Password is required',
   PASSWORD_NOT_STRING = 'Password must be a string',
   PASSWORD_NOT_SO_LONG = 'Password must be longer than 7 characters',
+  PASSWORD_OR_USERNAME_UNAUTHORIZED = 'Username or password invalid',
 }
