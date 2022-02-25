@@ -1,6 +1,6 @@
 import { IUser } from '../interfaces/user';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
-import createToken from '../helpers/tokenCreation';
+import { createToken } from '../helpers/tokens';
 import createUsers from '../models/user';
 
 const usernameValidation = (username: string) => {

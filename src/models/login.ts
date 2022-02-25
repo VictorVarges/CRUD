@@ -1,7 +1,7 @@
 import { ILogin, IDLogin } from '../interfaces/login';
 import connection from './connection';
 
-const getUsers = async (login: ILogin): Promise<IDLogin[]> => {
+const accessLogin = async (login: ILogin): Promise<IDLogin[]> => {
   const { username, password } = login;
   const query = ('SELECT * FROM Trybesmith.Users VALUES WHERE username=? AND password=?');
   const [rows] = await connection.execute(query, [username, password]);
@@ -9,4 +9,4 @@ const getUsers = async (login: ILogin): Promise<IDLogin[]> => {
   return rows as IDLogin[];
 };
 
-export default getUsers;
+export default accessLogin;

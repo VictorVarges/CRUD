@@ -1,7 +1,10 @@
-import { ILogin } from '../interfaces/login';
+import { IDLogin, ILogin } from '../interfaces/login';
+import { createToken } from '../helpers/tokens';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
+import accessLogin from '../models/login';
+import { IDuser } from '../interfaces/user';
 
-export const usernameValidation = (username: string, password: string) => {
+const usernameValidation = (username: string, password: string) => {
   if (username === undefined) {
     return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.USERNAME_INVALID };
   }
@@ -9,7 +12,7 @@ export const usernameValidation = (username: string, password: string) => {
     return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED };
   }
 };
-export const passwordValidation = (username: string, password: string) => {
+const passwordValidation = (username: string, password: string) => {
   if (password === undefined) {
     return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.USERNAME_INVALID };
   }
@@ -18,7 +21,7 @@ export const passwordValidation = (username: string, password: string) => {
   }
 };
 
-const loginValidated = async (login: ILogin) => {
+const loginValidated = async (login: IDuser) => {
   const { username, password } = login;
 
   const invokeUsername = usernameValidation(username, password);
@@ -26,4 +29,13 @@ const loginValidated = async (login: ILogin) => {
 
   if (invokeUsername) return invokeUsername;
   if (invokePassword) return invokePassword;
+
+  const responseDB: Promise<ILogin> = await accessLogin(login);
+  console.log({ responseDB });
+  
+  const token = createToken(responseDB);
+
+  return { code: 200, message: token };
 };
+
+export default loginValidated;
