@@ -4,6 +4,7 @@ import loginValidated from '../services/login';
 const accessLogin = async (req: Request, res: Response) => {
   const { username, password } = req.body;
   const response = await loginValidated({ username, password });
+  console.log({ response });
 
   if (response.code !== 200) {
     return res.status(response.code).json({ error: response.message });

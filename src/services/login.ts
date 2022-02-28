@@ -1,39 +1,42 @@
-import { ILogin } from '../interfaces/login';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
+import { ILogin } from '../interfaces/login';
 import accessLogin from '../models/login';
 import { createToken } from '../authorization/tokens';
 
-const usernameValidation = (username: string, password: string) => {
-  if (username === undefined) {
+const usernameValidation = (username: string | undefined) => {   
+  if (!username) {
     return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.USERNAME_INVALID };
   }
-  if (username === undefined && password) {
-    return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED };
-  }
 };
-const passwordValidation = (username: string, password: string) => {
-  if (password === undefined) {
+const passwordValidation = (password: string | undefined) => {
+  if (!password) {
     return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.PASSWORD_INVALID };
   }
-  if (username && password === undefined) {
-    return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED }; 
+};
+
+const userValidation = async (login: ILogin) => {
+  const { username, password } = login;
+  const userDB = await accessLogin({ username, password });
+  console.log({ userDB });
+
+  if (userDB.length === 0) {
+    return { code: HTTPSTATUS.UNAUTHORIZED, message: MESSAGE.PASSWORD_OR_USERNAME_UNAUTHORIZED };
   }
 };
 
 const loginValidated = async (login: ILogin) => {
   const { username, password } = login;
 
-  const invokeUsername = usernameValidation(username, password);
-  const invokePassword = passwordValidation(username, password);
+  const invokeUsername = usernameValidation(username);
+  const invokePassword = passwordValidation(password);
+  const invokeUser = await userValidation({ username, password });
 
   if (invokeUsername) return invokeUsername;
   if (invokePassword) return invokePassword;
+  if (invokeUser) return invokeUser;
 
-  const [responseDB] = await accessLogin(login);
-  console.log('res', responseDB);
-  
+  const [responseDB] = await accessLogin(login);  
   const token = createToken(responseDB);
-  console.log(token);
 
   return { code: 200, message: token };
 };
