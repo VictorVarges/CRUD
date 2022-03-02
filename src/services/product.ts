@@ -4,7 +4,7 @@ import createProduct from '../models/product';
 const bodyProductValidated = async (product: IProduct) => {
   const insertInDB = await createProduct(product);
 
-  return { code: 201, message: insertInDB };
+  return insertInDB;
 };
 
 export default bodyProductValidated;
