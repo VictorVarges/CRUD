@@ -1,17 +1,26 @@
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
+import { IProduct } from '../interfaces/product';
 
 const nameProductValidation = (name: string) => {
   if (name === undefined) return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.NAME_INVALID };
 
-  if (typeof name !== 'string') return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.NAME_NOT_STRING };
+  if (typeof name !== 'string') { 
+    return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.NAME_NOT_STRING }; 
+  }
 
-  if (name.length < 3) return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.PASSWORD_NOT_SO_LONG };
+  if (name.length < 3) {
+    return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.PASSWORD_NOT_SO_LONG };
+  }
 };
  
 const amountProductValidation = (amount: string) => {
-  if (amount === undefined) return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.AMOUNT_INVALID };
+  if (amount === undefined) {
+    return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.AMOUNT_INVALID };
+  }
 
-  if (typeof amount !== 'string') return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.AMOUNT_NOT_STRING };
+  if (typeof amount !== 'string') { 
+    return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.AMOUNT_NOT_STRING }; 
+  }
 
   if (amount.length < 3) {
     return {
@@ -19,3 +28,14 @@ const amountProductValidation = (amount: string) => {
     };
   }
 };
+
+const bodyProductValidated = (product: IProduct) => {
+  const { name, amount } = product;
+  const invokeNameValidation = nameProductValidation(name);
+  const invokeAmountValidation = amountProductValidation(amount);
+
+  if (invokeNameValidation) return invokeNameValidation;
+  if (invokeAmountValidation) return invokeAmountValidation;
+};
+
+export default bodyProductValidated;
