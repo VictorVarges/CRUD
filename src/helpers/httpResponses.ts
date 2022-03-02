@@ -19,4 +19,9 @@ export enum MESSAGE {
   PASSWORD_NOT_STRING = 'Password must be a string',
   PASSWORD_NOT_SO_LONG = 'Password must be longer than 7 characters',
   PASSWORD_OR_USERNAME_UNAUTHORIZED = 'Username or password invalid',
+  TOKEN_NOT_FOUND = 'Token not found',
+  INVALID_TOKEN = 'Invalid token',
+  NAME_INVALID = 'Name is required',
+  NAME_NOT_STRING = 'Name must be a string',
+  NAME_NOT_SO_LONG = 'Name must be longer than 2 characters',
 }
