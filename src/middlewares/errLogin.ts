@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express';
-// import loginValidated from '../services/login';
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
 
 const bodyValidation = (req: Request, res: Response, next: NextFunction) => {  
