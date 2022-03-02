@@ -24,4 +24,7 @@ export enum MESSAGE {
   NAME_INVALID = 'Name is required',
   NAME_NOT_STRING = 'Name must be a string',
   NAME_NOT_SO_LONG = 'Name must be longer than 2 characters',
+  AMOUNT_INVALID = 'Amount is required',
+  AMOUNT_NOT_STRING = 'Amount must be a string',
+  AMOUNT_NOT_SO_LONG = 'Amount must be longer than 2 characters',
 }
