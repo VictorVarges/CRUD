@@ -1,7 +1,9 @@
 export enum HTTPSTATUS {
+  OK = 200,
   CREATED = 201,
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
   UNPROCESSABLE_ENTITY = 422,
 }
 
@@ -27,4 +29,5 @@ export enum MESSAGE {
   AMOUNT_INVALID = 'Amount is required',
   AMOUNT_NOT_STRING = 'Amount must be a string',
   AMOUNT_NOT_SO_LONG = 'Amount must be longer than 2 characters',
+  NO_PRODUCTS_WERE_PASSED = 'No products in database',
 }

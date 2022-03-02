@@ -1,15 +1,12 @@
-import { FieldPacket, ResultSetHeader } from 'mysql2';
 import { IGetProduct } from '../interfaces/product';
 import connection from './connection';
 
-const getAllProducts = async (products: IGetProduct) => {
-  const { id, name, amount, orderId } = products;
-  const [response]: [ResultSetHeader, FieldPacket[]] = await connection.execute(
-    'SELECT * FROM Trybesmith.Products;', 
-    [id, name, amount, orderId],
+const getAllProducts = async (): Promise<IGetProduct[]> => {
+  const [response] = await connection.execute(
+    'SELECT * FROM Trybesmith.Products;',
   );
 
-  return { id: response.insertId, name, amount, orderId };
+  return response as IGetProduct[];
 };
 
 export default getAllProducts;
