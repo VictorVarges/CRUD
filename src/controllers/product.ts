@@ -9,7 +9,7 @@ const createProduct = async (req: Request, res: Response) => {
     return res.status(insertInDB.code).json({ error: insertInDB.message });
   }
 
-  return res.status(insertInDB.code).json({ token: insertInDB.message });
+  return res.status(insertInDB.code).json(insertInDB);
 };
 
 export default createProduct;
