@@ -1,5 +1,6 @@
 import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
 import { IProduct } from '../interfaces/product';
+import createProduct from '../models/product';
 
 const nameProductValidation = (name: string) => {
   if (name === undefined) return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.NAME_INVALID };
@@ -29,13 +30,16 @@ const amountProductValidation = (amount: string) => {
   }
 };
 
-const bodyProductValidated = (product: IProduct) => {
+const bodyProductValidated = async (product: IProduct) => {
   const { name, amount } = product;
   const invokeNameValidation = nameProductValidation(name);
   const invokeAmountValidation = amountProductValidation(amount);
 
   if (invokeNameValidation) return invokeNameValidation;
   if (invokeAmountValidation) return invokeAmountValidation;
+
+  const insertInDB = await createProduct(product);
+  return { code: 201, message: insertInDB };
 };
 
 export default bodyProductValidated;

@@ -1,0 +1,15 @@
+import { Request, Response } from 'express';
+import userBodyValidations from '../services/user';
+
+const createProduct = async (req: Request, res: Response) => {
+  const { name, amount } = req.body;
+  const insertInDB = await userBodyValidations({ name, amount });
+
+  if (insertInDB.code !== 201) {
+    return res.status(insertInDB.code).json({ error: insertInDB.message });
+  }
+
+  return res.status(insertInDB.code).json({ token: insertInDB.message });
+};
+
+export default createProduct;
