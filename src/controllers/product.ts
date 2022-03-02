@@ -1,15 +1,12 @@
 import { Request, Response } from 'express';
+import { IProduct } from '../interfaces/product';
 import bodyProductValidated from '../services/product';
 
 const createProduct = async (req: Request, res: Response) => {
-  const { name, amount } = req.body;
+  const { name, amount }: IProduct = req.body;
   const insertInDB = await bodyProductValidated({ name, amount });
 
-  if (insertInDB.code !== 201) {
-    return res.status(insertInDB.code).json({ error: insertInDB.message });
-  }
-
-  return res.status(insertInDB.code).json(insertInDB);
+  return res.status(insertInDB.code).json({ item: insertInDB });
 };
 
 export default createProduct;
