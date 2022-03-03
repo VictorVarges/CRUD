@@ -6,12 +6,22 @@ import tokenValidate from './middlewares/verifyToken';
 import createProduct from './controllers/product';
 import nameProductValidation, { amountProductValidation } from './middlewares/errProduct';
 import getAllProducts from './controllers/getProducts';
+import {
+  usernameValidation, classeValidation, levelValidation, passwordValidation,
+} from './middlewares/errUser';
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/users', createUser);
+app.post(
+  '/users',
+  usernameValidation,
+  classeValidation,
+  levelValidation,
+  passwordValidation,
+  createUser,
+);
 app.post('/login', bodyValidation, accessLogin);
 app.post('/products', tokenValidate, nameProductValidation, amountProductValidation, createProduct);
 
