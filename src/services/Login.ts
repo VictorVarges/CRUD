@@ -1,7 +1,7 @@
-import { ILogin } from '../interfaces/login';
-import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
-import accessLogin from '../models/login';
-import { createToken } from '../authorization/tokens';
+import { ILogin } from '../interfaces/ILogin';
+import { HTTPSTATUS, MESSAGE } from '../helpers/HttpResponses';
+import accessLogin from '../models/Login';
+import { createToken } from '../authorization/Tokens';
 
 const userValidation = async (login: ILogin) => {
   const { username, password } = login;

@@ -1,7 +1,7 @@
-import { IUser } from '../interfaces/user';
-import { HTTPSTATUS } from '../helpers/httpResponses';
-import { createToken } from '../authorization/tokens';
-import createUsers from '../models/user';
+import { IUser } from '../interfaces/IUser';
+import { HTTPSTATUS } from '../helpers/HttpResponses';
+import { createToken } from '../authorization/Tokens';
+import createUsers from '../models/User';
 
 const userBodyValidations = async (user: IUser) => {
   const insertInDB = await createUsers(user);

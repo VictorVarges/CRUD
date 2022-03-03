@@ -1,5 +1,5 @@
-import { IGetProduct } from '../interfaces/product';
-import connection from './connection';
+import { IGetProduct } from '../interfaces/IProduct';
+import connection from './Connection';
 
 const getAllProducts = async (): Promise<IGetProduct[]> => {
   const [response] = await connection.execute(

@@ -1,14 +1,14 @@
 import express from 'express';
-import createUser from './controllers/user';
-import accessLogin from './controllers/login';
-import bodyValidation from './middlewares/errLogin';
-import tokenValidate from './middlewares/verifyToken';
-import createProduct from './controllers/product';
-import nameProductValidation, { amountProductValidation } from './middlewares/errProduct';
-import getAllProducts from './controllers/getProducts';
+import createUser from './controllers/User';
+import accessLogin from './controllers/Login';
+import bodyValidation from './middlewares/ErrLogin';
+import tokenValidate from './middlewares/VerifyToken';
+import createProduct from './controllers/Product';
+import nameProductValidation, { amountProductValidation } from './middlewares/ErrProduct';
+import getAllProducts from './controllers/GetProducts';
 import {
   usernameValidation, classeValidation, levelValidation, passwordValidation,
-} from './middlewares/errUser';
+} from './middlewares/ErrUser';
 
 const app = express();
 

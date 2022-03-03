@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
-import getAll from '../services/getProducts';
+import { HTTPSTATUS, MESSAGE } from '../helpers/HttpResponses';
+import getAll from '../services/GetProducts';
 
 const getAllProducts = async (req: Request, res: Response) => {
   const response = await getAll();

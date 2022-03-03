@@ -1,6 +1,6 @@
 import { FieldPacket, ResultSetHeader } from 'mysql2';
-import { IUser, IDuser } from '../interfaces/user';
-import connection from './connection';
+import { IUser, IDuser } from '../interfaces/IUser';
+import connection from './Connection';
 
 const createUsers = async (user: IUser): Promise<IDuser> => {
   const { username, classe, level, password } = user;

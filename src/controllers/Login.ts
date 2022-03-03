@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import loginValidated from '../services/login';
+import loginValidated from '../services/Login';
 
 const accessLogin = async (req: Request, res: Response) => {
   const { username, password } = req.body;

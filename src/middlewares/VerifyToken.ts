@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
-import { verifyToken } from '../authorization/tokens';
+import { HTTPSTATUS, MESSAGE } from '../helpers/HttpResponses';
+import { verifyToken } from '../authorization/Tokens';
 
 const tokenValidate = (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;

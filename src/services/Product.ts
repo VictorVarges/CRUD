@@ -1,5 +1,5 @@
-import { IProduct } from '../interfaces/product';
-import createProduct from '../models/product';
+import { IProduct } from '../interfaces/IProduct';
+import createProduct from '../models/Product';
 
 const bodyProductValidated = async (product: IProduct) => {
   const insertInDB = await createProduct(product);

@@ -1,6 +1,6 @@
 import { FieldPacket, ResultSetHeader } from 'mysql2';
-import { IDProduct, IProduct } from '../interfaces/product';
-import connection from './connection';
+import { IDProduct, IProduct } from '../interfaces/IProduct';
+import connection from './Connection';
 
 const createProduct = async (product: IProduct): Promise<IDProduct> => {
   const { name, amount } = product;

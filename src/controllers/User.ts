@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import userBodyValidations from '../services/user';
-import { MESSAGE, HTTPSTATUS } from '../helpers/httpResponses';
+import userBodyValidations from '../services/User';
+import { MESSAGE, HTTPSTATUS } from '../helpers/HttpResponses';
 
 const createUser = async (req: Request, res: Response) => {
   const { username, classe, level, password } = req.body;

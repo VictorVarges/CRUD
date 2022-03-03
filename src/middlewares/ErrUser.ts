@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
+import { HTTPSTATUS, MESSAGE } from '../helpers/HttpResponses';
 
 export const usernameValidation = (req: Request, res: Response, next: NextFunction) => {
   const { username } = req.body;
