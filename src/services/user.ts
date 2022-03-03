@@ -26,7 +26,7 @@ const classeValidation = (classe: string) => {
 };
 
 const levelValidation = (level: number) => {
-  if (level === undefined) return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.LEVEL_INVALID };
+  if (!level) return { code: HTTPSTATUS.BAD_REQUEST, message: MESSAGE.LEVEL_INVALID };
 
   if (level < 1) {
     return { code: HTTPSTATUS.UNPROCESSABLE_ENTITY, message: MESSAGE.LEVEL_NOT_SO_LONG };
