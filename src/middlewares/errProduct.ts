@@ -3,7 +3,7 @@ import { HTTPSTATUS, MESSAGE } from '../helpers/httpResponses';
 
 const nameProductValidation = (req: Request, res: Response, next: NextFunction) => {  
   const { name } = req.body;
-  if (name === undefined) {
+  if (!name) {
     return res.status(HTTPSTATUS.BAD_REQUEST).json({ error: MESSAGE.NAME_INVALID });
   }
 
@@ -22,7 +22,7 @@ export default nameProductValidation;
 
 export const amountProductValidation = (req: Request, res: Response, next: NextFunction) => {
   const { amount } = req.body;
-  if (amount === undefined) {
+  if (!amount) {
     return res.status(HTTPSTATUS.BAD_REQUEST).json({ error: MESSAGE.AMOUNT_INVALID });
   }
 
